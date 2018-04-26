@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
 
         val rvForecastList = find<RecyclerView>(R.id.rv_forecast_list)
         rvForecastList.layoutManager = LinearLayoutManager(this)
-        rvForecastList.adapter = ForecastListAdapter(items)
 
         /**
          * Kotlin中的基本类型：
@@ -76,6 +75,14 @@ class MainActivity : AppCompatActivity() {
 
             uiThread {
                 niceToast("Request performed")
+            }
+        }
+
+        doAsync {
+            val result = RequestForecastCommand(94043).execute()
+
+            uiThread {
+                rvForecastList.adapter = ForecastListAdapter(result)
             }
         }
     }
