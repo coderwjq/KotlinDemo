@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.Toast
-import com.coderwjq.kotlindemo.domain.Forecast
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
 import org.jetbrains.anko.uiThread
@@ -83,15 +82,20 @@ class MainActivity : AppCompatActivity() {
             val result = RequestForecastCommand(94043).execute()
 
             uiThread {
-                rvForecastList.adapter = ForecastListAdapter(result,
-                        // 创建匿名内部类
-                        object : ForecastListAdapter.OnItemClickListener {
-                            override fun invoke(forecast: Forecast) {
-                                niceToast(forecast.date)
-                            }
-                        })
+                rvForecastList.adapter = ForecastListAdapter(result) { niceToast(it.date) }
             }
         }
+
+        /**
+         * 一个lambda表达式通过参数的形式被定义在箭头的左边（被圆括号包围），然后在箭头的右边返回结果值
+         *
+         * with函数的内部实现
+         *
+         * inline fun <T> with(t: T, body: T.() -> Unit) { t.body() }
+         *
+         * 内联函数：会在编译的时候被替换掉，而不是真正的方法调用
+         * 这在一些情况下可以减少内存分配和运行时开销
+         */
     }
 
     /**
