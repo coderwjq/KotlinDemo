@@ -4,11 +4,10 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.find
 import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
@@ -34,8 +33,7 @@ class MainActivity : AppCompatActivity() {
 //        toast("携带时间参数", Toast.LENGTH_LONG)
         niceToast(message = "Nice Toast", length = Toast.LENGTH_LONG)
 
-        val rvForecastList = find<RecyclerView>(R.id.rv_forecast_list)
-        rvForecastList.layoutManager = LinearLayoutManager(this)
+        forecastList.layoutManager = LinearLayoutManager(this)
 
         /**
          * Kotlin中的基本类型：
@@ -82,7 +80,7 @@ class MainActivity : AppCompatActivity() {
             val result = RequestForecastCommand(94043).execute()
 
             uiThread {
-                rvForecastList.adapter = ForecastListAdapter(result) { niceToast(it.date) }
+                forecastList.adapter = ForecastListAdapter(result) { niceToast(it.date) }
             }
         }
 

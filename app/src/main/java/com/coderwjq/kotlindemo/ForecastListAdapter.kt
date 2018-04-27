@@ -4,12 +4,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.coderwjq.kotlindemo.domain.Forecast
 import com.coderwjq.kotlindemo.domain.ForecastList
 import com.squareup.picasso.Picasso
-import org.jetbrains.anko.find
+import kotlinx.android.synthetic.main.item_forecast.view.*
 
 /**
  * Created by wangjiaqi on 2018/4/25
@@ -45,20 +43,15 @@ class ForecastListAdapter(val weekForecast: ForecastList,
     override fun getItemCount(): Int = weekForecast.size()
 
     class ViewHolder(itemView: View, val itemClick: (Forecast) -> Unit) : RecyclerView.ViewHolder(itemView) {
-        private val iconView: ImageView = itemView.find(R.id.icon)
-        private val dateView: TextView = itemView.find(R.id.dateText)
-        private val descriptionView: TextView = itemView.find(R.id.descriptionText)
-        private val maxTemperatureView: TextView = itemView.find(R.id.maxTemperature)
-        private val minTemperatureView: TextView = itemView.find(R.id.minTemperature)
 
         fun bindForecast(forecast: Forecast) {
             with(forecast) {
-                Picasso.with(itemView.ctx).load(iconUrl).into(iconView)
+                Picasso.with(itemView.ctx).load(iconUrl).into(itemView.iconView)
 
-                dateView.text = date
-                descriptionView.text = description
-                maxTemperatureView.text = "${high.toString()}"
-                minTemperatureView.text = "${low.toString()}"
+                itemView.dateText.text = date
+                itemView.descriptionText.text = description
+                itemView.maxTemperature.text = "${high}º"
+                itemView.minTemperature.text = "${low}º"
                 itemView.setOnClickListener {
                     itemClick(forecast)
                 }
