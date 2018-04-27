@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KProperty
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     val TAG = javaClass.simpleName
@@ -105,6 +107,11 @@ class MainActivity : AppCompatActivity() {
          *
          * 所有构造函数默认都是public的，可以使用private constructor修饰把构造函数修改为private
          */
+
+        /**
+         * 委托属性：使用by关键词指定一个委托对象
+         * 标准委托：Lazy、Observable、Vetoable（真正保存数据之前进行判断）、Not Null、从Map中映射值
+         */
     }
 
     /**
@@ -136,5 +143,21 @@ class MainActivity : AppCompatActivity() {
 
     fun Context.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
         Toast.makeText(this, message, duration).show()
+    }
+
+    /**
+     * 自定义委托，只能初始化value一次，多次设置value抛出异常，获取value时如果为空抛出异常，如果不为空直接返回value的值
+     */
+    public class notNullSingleValueVar<T>() : ReadWriteProperty<Any?, T> {
+        private var value: T? = null
+
+        override fun getValue(thisRef: Any?, property: KProperty<*>): T {
+            return value ?: throw IllegalStateException("value not initialized")
+        }
+
+        override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
+            this.value = if (this.value == null) value else throw IllegalStateException("value already initialized")
+        }
+
     }
 }
