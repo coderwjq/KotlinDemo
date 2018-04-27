@@ -6,11 +6,11 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     val TAG = javaClass.simpleName
@@ -145,10 +145,14 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, message, duration).show()
     }
 
+    object DelegatesExt {
+        fun <T> notNullSingleValue() = NotNullSingleValueVar<T>()
+    }
+
     /**
      * 自定义委托，只能初始化value一次，多次设置value抛出异常，获取value时如果为空抛出异常，如果不为空直接返回value的值
      */
-    public class notNullSingleValueVar<T>() : ReadWriteProperty<Any?, T> {
+    public class NotNullSingleValueVar<T>() : ReadWriteProperty<Any?, T> {
         private var value: T? = null
 
         override fun getValue(thisRef: Any?, property: KProperty<*>): T {

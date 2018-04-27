@@ -7,7 +7,7 @@ import android.app.Application
  */
 class App : Application() {
     companion object {
-        var instance: App? by MainActivity.notNullSingleValueVar()
+        var instance: App by MainActivity.DelegatesExt.notNullSingleValue()
     }
 
     override fun onCreate() {
