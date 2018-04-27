@@ -96,6 +96,17 @@ class MainActivity : AppCompatActivity() {
          * 内联函数：会在编译的时候被替换掉，而不是真正的方法调用
          * 这在一些情况下可以减少内存分配和运行时开销
          */
+
+        /**
+         * Kotlin中默认的修饰符是public
+         *
+         * 1. private
+         * 2. protected
+         * 3. internal:对整个module可见
+         * 4. public
+         *
+         * 所有构造函数默认都是public的，可以使用private constructor修饰把构造函数修改为private
+         */
     }
 
     /**
