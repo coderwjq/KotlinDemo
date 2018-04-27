@@ -164,4 +164,42 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+    /**
+     * 集合与函数操作符
+     *
+     * 1. 总数操作符
+     * 1.1 any 如果至少有一个元素符合给出的判断条件，则返回true
+     * 1.2 all 如果全部元素符合给出的判断条件，则返回true
+     * 1.3 count 返回符合判断条件元素的总数
+     * 1.4 fold 在一个初始值的基础上从第一项到最后一项通过一个函数累计所有的元素。
+     * 1.5 foldRight 和fold一样，但是顺序是从最后一项到第一项
+     * 1.6 forEach 遍历所有元素，并执行给定的操作
+     * 1.7 forEachIndexed 和forEach相同，但是可以同时得到元素的index
+     * 1.8 max 返回最大一项，如果没有返回null
+     * 1.9 maxBy 根据给定函数，返回最大一项，如果没有返回null
+     * 1.10 min、minBy
+     * 1.11 none 如果没有任何元素和给定函数匹配，则返回true
+     * 1.12 reduce 和fold一样，但是没有初始值，reduceRight同foldRight
+     * 1.13 sum 返回每一项通过给定函数转换后的数据的总和
+     *
+     * 2. 过滤操作符
+     * 2.1 drop 返回去掉前n个元素的所有元素的列表
+     * 2.2 dropWhile 返回去掉指定元素的列表（从第一个元素开始判断）
+     * 2.3 dropLastWhild 同dropWhile，但是从最后一个元素开始判断
+     * 2.4 filter 过滤所有符合给定函数条件的元素，filterNot过滤所有不符合...，filterNotNull过滤所有不是null的元素
+     * 2.5 slice 过滤list中指定index的元素
+     * 2.6 take 返回从第一个开始的n个元素，takeLast返回从最后一个开始的n个元素，takeWhile返回从第一个开始符合条件的元素
+     *
+     * 3. 映射操作符
+     * 3.1 flatMap 遍历所有的元素，为每一个创建一个集合，最后把所有的集合放在一个集合中。
+     * 3.2 groupBy 返回一个根据给定函数分组后的map
+     * 3.3 map 返回一个每一个元素根据给定的函数转换所组成的List
+     * 3.4 mapIndexed 返回一个每一个元素根据给定的包含元素index的函数转换所组成的List
+     * 3.5 mapNotNull 返回一个每一个非null元素根据给定的函数转换所组成的List
+     *
+     * 4. 元素操作符
+     * 5. 生产操作符
+     * 6. 顺序操作符
+     */
 }
