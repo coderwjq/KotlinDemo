@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.widget.Toast
+import com.coderwjq.kotlindemo.domain.Forecast
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
 import org.jetbrains.anko.uiThread
@@ -82,7 +83,13 @@ class MainActivity : AppCompatActivity() {
             val result = RequestForecastCommand(94043).execute()
 
             uiThread {
-                rvForecastList.adapter = ForecastListAdapter(result)
+                rvForecastList.adapter = ForecastListAdapter(result,
+                        // 创建匿名内部类
+                        object : ForecastListAdapter.OnItemClickListener {
+                            override fun invoke(forecast: Forecast) {
+                                niceToast(forecast.date)
+                            }
+                        })
             }
         }
     }
